@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import be.technifutur.androidpersistanceeval.MainActivity
+import be.technifutur.androidpersistanceeval.R
 import be.technifutur.androidpersistanceeval.addexpense.AddExpenseFragment
 import be.technifutur.androidpersistanceeval.databinding.FragmentExpenseListBinding
 import be.technifutur.androidpersistanceeval.expenses.ExpenseWithType
@@ -44,6 +45,7 @@ class ExpenseListFragment : Fragment() {
             }
         }
         binding.toAddButton.setOnClickListener {
+            findNavController().navigate(R.id.addExpenseFragment)
         }
     }
 
