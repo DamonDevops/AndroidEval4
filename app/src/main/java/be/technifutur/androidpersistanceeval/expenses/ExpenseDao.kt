@@ -14,7 +14,9 @@ interface ExpenseDao {
     fun getExpensesWithType() : Flow<List<ExpenseWithType>>
     @Query("SELECT * FROM ExpenseType")
     fun getAllType() :List<ExpenseType>
-    @Query("SELECT FIRST(typeId) FROM ExpenseType WHERE name = :name")
+    @Query("SELECT * FROM Expense")
+    fun getAllExpenses() : List<Expense>
+    @Query("SELECT typeId FROM ExpenseType WHERE name = :name")
     fun getTypeId(name :String) :Long
     @Insert
     suspend fun addExpense(expense :Expense)

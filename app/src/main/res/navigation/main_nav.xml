@@ -9,7 +9,11 @@
         android:id="@+id/expenseListFragment"
         android:name="be.technifutur.androidpersistanceeval.expenselist.ExpenseListFragment"
         android:label="fragment_expense_list"
-        tools:layout="@layout/fragment_expense_list" />
+        tools:layout="@layout/fragment_expense_list" >
+        <action
+            android:id="@+id/action_expenseListFragment_to_addExpenseFragment"
+            app:destination="@id/addExpenseFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addExpenseFragment"
         android:name="be.technifutur.androidpersistanceeval.addexpense.AddExpenseFragment"
