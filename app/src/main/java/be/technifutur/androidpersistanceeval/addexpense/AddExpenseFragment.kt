@@ -1,6 +1,7 @@
 package be.technifutur.androidpersistanceeval.addexpense
 
 import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.InputType
 import androidx.fragment.app.Fragment
@@ -19,6 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import java.util.Calendar
 
 class AddExpenseFragment : Fragment() {
     private lateinit var binding :FragmentAddExpenseBinding
@@ -41,6 +43,8 @@ class AddExpenseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mainActivity = (activity as MainActivity)
         var types :List<ExpenseType>
+
+
         binding.typeField.inputType = InputType.TYPE_NULL
         binding.typeField.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
@@ -50,9 +54,20 @@ class AddExpenseFragment : Fragment() {
                 }
             }
         }
+        binding.dateField.inputType = InputType.TYPE_NULL
+        binding.dateField.setOnClickListener {
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+
+            DatePickerDialog(requireContext(), {_, yearP, monthP, dayP ->
+                val str = String.format("%d-%02d-%02d",yearP, monthP+1, dayP)
+                binding.dateField.setText(str)
+            }, year, month, day).show()
+        }
 
         binding.saveButton.setOnClickListener {
-
             if(!binding.nameField.text.isNullOrBlank() && !binding.ammountField.text.isNullOrBlank() && !binding.dateField.text.isNullOrBlank() && !binding.typeField.text.isNullOrBlank()){
                 expense = Expense(name = binding.nameField.text.toString(),
                     value = binding.ammountField.text.toString().toFloat(),
@@ -79,7 +94,7 @@ class AddExpenseFragment : Fragment() {
             .setTitle("Choose type of expense:")
             .setSingleChoiceItems(charSequence.toTypedArray(), checkedItem){ dialog, which ->
                 binding.typeField.setText(types[which].name)
-                typeId = which
+                typeId = types[which].typeId.toInt()
                 dialog.dismiss()
             }.create().show()
     }

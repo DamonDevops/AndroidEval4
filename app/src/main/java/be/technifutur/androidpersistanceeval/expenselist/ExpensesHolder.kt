@@ -11,7 +11,8 @@ class ExpensesHolder(private val viewBinding : ExpenseCellBinding) : RecyclerVie
     fun bind(expense :ExpenseWithType){
         viewBinding.typeLabel.text = expense.type.name
         viewBinding.nameLabel.text = expense.expense.name
-        viewBinding.valueLabel.text = expense.expense.value.toString()
+        val str = expense.expense.value.toString() + " €"
+        viewBinding.valueLabel.text = str
         viewBinding.dateLabel.text = expense.expense.date?.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
     }
 }

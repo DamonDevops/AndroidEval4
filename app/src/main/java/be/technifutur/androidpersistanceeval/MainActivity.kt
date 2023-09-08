@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
                 expDao.addType(ExpenseType(name = "Fraud"))
             }
             if(expDao.getAllExpenses().isEmpty()){
-                expDao.addExpense(Expense(name = "Buying beers for the coach", date = LocalDate.parse("2023-09-08"), value = 26.4f, typeId = 3))
+                expDao.addExpense(Expense(name = "Getting a big score for this Evaluation", date = LocalDate.parse("2023-09-08"), value = 26000.5f, typeId = 3))
                 expDao.addExpense(Expense(name = "Orval 8° for personnal recreation", date = LocalDate.parse("2023-09-08"), value = 16.8f, typeId = 2))
                 expDao.addExpense(Expense(name = "Contributions", date = LocalDate.parse("2023-09-08"), value = 0.2f, typeId = 1))
             }
